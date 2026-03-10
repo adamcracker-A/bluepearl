@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Suspense } from 'react'
 import Layout from './layouts/Layout'
-import Acceuil from './pages/Acceuil'
+import Accueil from './pages/Accueil'
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center h-screen">
@@ -14,7 +14,7 @@ function App() {
     <Suspense fallback={<LoadingSpinner />}>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Acceuil />} />
+          <Route path="/" element={<Accueil />} />
           {/* Add more pages here as you create them */}
           {/* <Route path="/chambres-suites" element={<ChambresEtSuites />} /> */}
           {/* <Route path="/restaurant" element={<Restaurant />} /> */}

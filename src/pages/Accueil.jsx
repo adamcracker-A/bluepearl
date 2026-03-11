@@ -1,209 +1,34 @@
 import { useState } from 'react';
-import { FaUser, FaBath, FaWifi, FaTv, FaCoffee, FaSnowflake, FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { images, rooms, offers, restaurantData, activities, exploreItems } from '../constants/accueilData';
 
 function Acceuil() {
-    //head slider
-
-    const images = [
-        "/locales/assets/Rectangle 4193.png",
-        "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&q=80&w=2000",
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=2000"
-    ];
-
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [roomIndex, setRoomIndex] = useState(0);
+    const [offerIndex, setOfferIndex] = useState(0);
+    const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(0);
+    const [exploreIndex, setExploreIndex] = useState(0);
+
+    // just logic, no data 🎉
     const prevImage = () => setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
     const nextImage = () => setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-    //chambres slider
-
-    const rooms = [
-        {
-            name: "Ambassador Suite",
-            description: "Chaque espace reflète mon désir de vous accueillir dans un univers où le luxe se fait personnel, apaisant et naturellement raffiné.",
-            image: "/locales/assets/pic 1 offre.png",
-            icons: [
-                { icon: <FaUser />, label: "1-3 Personnes" },
-                { icon: <FaBath />, label: "Baignoire" },
-                { icon: <FaCoffee />, label: "Petit-déjeuner" },
-                { icon: <FaTv />, label: "Smart TV" },
-                { icon: <FaWifi />, label: "Free Wifi" },
-                { icon: <FaSnowflake />, label: "Air Conditioner" },
-            ],
-        },
-        {
-            name: "Deluxe Suite",
-            description: "Une autre suite élégante avec tout le confort dont vous rêvez.",
-            image: "/locales/assets/groupe 1.png",
-            icons: [
-                { icon: <FaUser />, label: "1-2 Personnes" },
-                { icon: <FaBath />, label: "Douche" },
-                { icon: <FaCoffee />, label: "Petit-déjeuner" },
-                { icon: <FaTv />, label: "Smart TV" },
-                { icon: <FaWifi />, label: "Free Wifi" },
-                { icon: <FaSnowflake />, label: "Air Conditioner" },
-            ],
-        },
-    ];
-
-    const [roomIndex, setRoomIndex] = useState(0);
+    const currentRoom = rooms[roomIndex];
     const prevRoom = () => setRoomIndex((prev) => (prev === 0 ? rooms.length - 1 : prev - 1));
     const nextRoom = () => setRoomIndex((prev) => (prev === rooms.length - 1 ? 0 : prev + 1));
-    const currentRoom = rooms[roomIndex];
 
-    // Offers slider
-    const offers = [
-        {
-            month: "Mois de Février",
-            discount: "5%",
-            desc: "Lorem ipsum dolor",
-            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop",
-        },
-        {
-            month: "Mois de Novembre",
-            discount: "10%",
-            desc: "Lorem ipsum dolor",
-            image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&auto=format&fit=crop",
-        },
-        {
-            month: "Mois de Décembre",
-            discount: "15%",
-            desc: "Lorem ipsum dolor",
-            image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&auto=format&fit=crop",
-        },
-        {
-            month: "Mois de Janvier",
-            discount: "20%",
-            desc: "Lorem ipsum dolor",
-            image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&auto=format&fit=crop",
-        },
-    ];
-
-    const [offerIndex, setOfferIndex] = useState(0);
     const visibleOffers = 3;
+    const currentOffers = offers.slice(offerIndex, offerIndex + visibleOffers);
     const prevOffer = () => setOfferIndex((prev) => (prev === 0 ? offers.length - visibleOffers : prev - 1));
     const nextOffer = () => setOfferIndex((prev) => (prev >= offers.length - visibleOffers ? 0 : prev + 1));
-    const currentOffers = offers.slice(offerIndex, offerIndex + visibleOffers);
 
-    //restaurant slider
-
-    // Restaurant data - makes left content dynamic
-    const restaurantData = [
-        {
-            id: 1,
-            title: "Le Patio Restaurant",
-            description: "Le Patio Restaurant vous accueille tout au long de la journée, sur sa terrasse, avec une offre raffinée de petit-déjeuner, déjeuner et dîner, pour une expérience culinaire élégante et conviviale du matin au soir.",
-            image: "/locales/assets/a3.png",
-            hours: [
-                { label: "Petit-déjeuner", time: "07h30 – 10h30" },
-                { label: "Déjeuner", time: "13h00 – 15h00" },
-                { label: "Dîner", time: "19h30 – 22h00" }
-            ],
-            primaryButton: { text: "RÉSERVEZ", link: "#" },
-            secondaryButton: { text: "PLUS DE DÉTAILS", link: "#" }
-        },
-        {
-            id: 2,
-            title: "La Terrasse Lounge",
-            description: "Détendez-vous dans notre espace lounge en plein air avec une sélection de cocktails signature et tapas méditerranéens dans une ambiance feutrée.",
-            image: "/locales/assets/a4.png",
-            hours: [
-                { label: "Ouverture", time: "10h00 – 00h00" },
-                { label: "Happy Hour", time: "18h00 – 20h00" },
-                { label: "Live Music", time: "21h00 – 23h30" }
-            ],
-            primaryButton: { text: "RÉSERVEZ", link: "#" },
-            secondaryButton: { text: "PLUS DE DÉTAILS", link: "#" }
-        },
-        {
-            id: 3,
-            title: "Le Gourmet Étoilé",
-            description: "Une expérience gastronomique exceptionnelle avec notre chef étoilé qui sublime les saveurs locales dans un cadre raffiné et intime.",
-            image: "/locales/assets/a5.png",
-            hours: [
-                { label: "Dîner Service", time: "19h30 – 22h30" },
-                { label: "Menu Dégustation", time: "Sur réservation" },
-                { label: "Wine Pairing", time: "Disponible" }
-            ],
-            primaryButton: { text: "RÉSERVEZ", link: "#" },
-            secondaryButton: { text: "PLUS DE DÉTAILS", link: "#" }
-        }
-    ];
-
-    const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(0);
     const currentRestaurant = restaurantData[currentRestaurantIndex];
+    const prevRestaurant = () => setCurrentRestaurantIndex((prev) => (prev === 0 ? restaurantData.length - 1 : prev - 1));
+    const nextRestaurant = () => setCurrentRestaurantIndex((prev) => (prev === restaurantData.length - 1 ? 0 : prev + 1));
 
-    const nextRestaurant = () => {
-        setCurrentRestaurantIndex((prev) => (prev === restaurantData.length - 1 ? 0 : prev + 1));
-    };
-
-    const prevRestaurant = () => {
-        setCurrentRestaurantIndex((prev) => (prev === 0 ? restaurantData.length - 1 : prev - 1));
-    };
-    //activities  
-
-    const activities = [
-        {
-            title: "CHANTER ENSEMBLE",
-            subtitle: "Chanter ensemble",
-            desc: "Musique live · Concert · Karaoké\nSpectacle de talents",
-            button: "SING!",
-            image: "/locales/assets/chanter.png"
-        },
-        {
-            title: "ACCRO A LA FÊTE",
-            subtitle: "Danse toute la nuit",
-            desc: "Club de nuit · Soirée · Vie nocturne\nTournée des bars",
-            button: "DANCE!",
-            image: "/locales/assets/acro.png"
-        },
-        {
-            title: "GAME ZONE",
-            subtitle: "Prêt à gagner ?",
-            desc: "Soirée Quiz · Team Building\nJeux de société",
-            button: "PLAY!",
-            image: "/locales/assets/games.png"
-        }
-    ];
-    //explore slider
-    const exploreItems = [
-        {
-            number: "01",
-            title: "Évasion en Yacht",
-            desc: "...",
-            image: "/locales/assets/yacht.png",
-            video: "/locales/assets/yacht.mp4"
-        },
-        {
-            number: "02",
-            title: "Plages Dorées",
-            desc: "...",
-            image: "/locales/assets/1stvideoph.png",
-            video: "/locales/assets/beach.mp4"
-        },
-        {
-            number: "03",
-            title: "Nature & Forêts",
-            desc: "...",
-            image: "/locales/assets/forest.png",
-            video: "/locales/assets/forest.mp4"
-        },
-        {
-            number: "04",
-            title: "Marina & Loisirs",
-            desc: "...",
-            image: "/locales/assets/marina.png",
-            video: "/locales/assets/marina.mp4"
-        }
-    ];
-
-    const [exploreIndex, setExploreIndex] = useState(0);
+    const current = exploreItems[exploreIndex];
     const prevExplore = () => setExploreIndex((prev) => (prev === 0 ? exploreItems.length - 1 : prev - 1));
     const nextExplore = () => setExploreIndex((prev) => (prev === exploreItems.length - 1 ? 0 : prev + 1));
-    const current = exploreItems[exploreIndex];
-    const next = exploreItems[(exploreIndex + 1) % exploreItems.length];
-
-
-    console.log("index:", exploreIndex)
     return (
         <>
             {/* Hero Slider */}
@@ -507,32 +332,32 @@ function Acceuil() {
                                     </div>
                                 );
                             })}
-
-                            {/* Navigation - Responsive */}
-                            <div className="absolute -bottom-10 sm:-bottom-12 left-0 right-0 flex justify-center items-center gap-3 sm:gap-4">
-                                <button
-                                    onClick={prevRestaurant}
-                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                    </svg>
-                                </button>
-
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1a3c5e] text-white flex items-center justify-center text-[10px] sm:text-xs font-semibold">
-                                    {currentRestaurantIndex + 1}/{restaurantData.length}
-                                </div>
-
-                                <button
-                                    onClick={nextRestaurant}
-                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                    </svg>
-                                </button>
-                            </div>
                         </div>
+                    </div>
+
+                    {/* Navigation - Centered at the bottom of the section */}
+                    <div className="flex justify-center items-center gap-3 sm:gap-4 mt-12 sm:mt-16">
+                        <button
+                            onClick={prevRestaurant}
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white shadow-sm"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            </svg>
+                        </button>
+
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#1a3c5e] text-white flex items-center justify-center text-[10px] sm:text-xs font-semibold shadow-md">
+                            {currentRestaurantIndex + 1}/{restaurantData.length}
+                        </div>
+
+                        <button
+                            onClick={nextRestaurant}
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white shadow-sm"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -625,9 +450,9 @@ function Acceuil() {
 
                         {/* Right — Image Slider */}
                         <div className="lg:w-3/5 relative h-[420px] overflow-hidden group">
-                            
+
                             {/* Sliding Track */}
-                            <div 
+                            <div
                                 className="flex transition-transform duration-700 ease-in-out h-full"
                                 style={{ transform: `translateX(-${exploreIndex * 100}%)` }}
                             >
@@ -642,15 +467,15 @@ function Acceuil() {
                                                     poster={item.image}
                                                 />
                                             ) : (
-                                                <img 
-                                                    src={item.image} 
+                                                <img
+                                                    src={item.image}
                                                     alt={item.title}
                                                     className="w-full h-full object-cover"
                                                 />
                                             )}
                                             {/* Gradient Overlay for better text visibility */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                                            
+
                                             <span className="absolute bottom-6 left-6 text-7xl font-black text-white/20 leading-none select-none">
                                                 {item.number}
                                             </span>
@@ -667,7 +492,7 @@ function Acceuil() {
                             </div>
 
                             {/* Navigation Arrows */}
-                            <button 
+                            <button
                                 onClick={prevExplore}
                                 className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-30 opacity-0 group-hover:opacity-100"
                             >
@@ -675,7 +500,7 @@ function Acceuil() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                                 </svg>
                             </button>
-                            <button 
+                            <button
                                 onClick={nextExplore}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-30 opacity-0 group-hover:opacity-100"
                             >

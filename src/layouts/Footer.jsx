@@ -18,17 +18,17 @@ function Footer() {
                 {/* Payment methods — replace src with your real images */}
                 <div className="flex flex-wrap justify-center gap-3">
                     {[
-                        { name: 'Visa', src: '/locales/assets/payments/visa.png' },
-                        { name: 'Diners', src: '/locales/assets/payments/diners.png' },
-                        { name: 'Mastercard', src: '/locales/assets/payments/mastercard.png' },
-                        { name: 'Stripe', src: '/locales/assets/payments/stripe.png' },
-                        { name: 'PayPal', src: '/locales/assets/payments/paypal.png' },
-                        { name: 'Google Pay', src: '/locales/assets/payments/google pay.png' },
-                        { name: 'Apple Pay', src: '/locales/assets/payments/apple pay.png' },
+                        { name: 'Visa', src: '/locales/assets/visa.png' },
+                        { name: 'Diners', src: '/locales/assets/diners.png' },
+                        { name: 'Mastercard', src: '/locales/assets/mastercard.png' },
+                        { name: 'Stripe', src: '/locales/assets/stripe.png' },
+                        { name: 'PayPal', src: '/locales/assets/paypal.png' },
+                        { name: 'Google Pay', src: '/locales/assets/google pay.png' },
+                        { name: 'Apple Pay', src: '/locales/assets/apple pay.png' },
                     ].map((p) => (
                         <div key={p.name} className="bg-white rounded px-3 py-2 flex items-center justify-center h-10 w-16">
                             {/* Replace with <img src={p.src} alt={p.name} className="h-5 object-contain" /> once you have the images */}
-                            <span className="text-[#1a1a1a] text-[10px] font-bold">{p.name}</span>
+                            <img src={p.src} alt={p.name} className="h-5 object-contain cursor-pointer" />
                         </div>
                     ))}
                 </div>
@@ -85,15 +85,15 @@ function Footer() {
                     {/* Social media — replace with your images */}
                     <div className="flex gap-3">
                         {[
-                            { name: 'fb', src: '/locales/assets/social/facebook.png' },
-                            { name: 'tk', src: '/locales/assets/social/tiktok.png' },
-                            { name: 'ig', src: '/locales/assets/social/insta.png' },
-                            { name: 'yt', src: '/locales/assets/social/youtube.png' },
+                            { name: 'fb', src: '/locales/assets/facebook.png' },
+                            { name: 'tk', src: '/locales/assets/tiktok.png' },
+                            { name: 'ig', src: '/locales/assets/insta.png' },
+                            { name: 'yt', src: '/locales/assets/youtube.png' },
                         ].map((s) => (
                             <a key={s.name} href="#"
                                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#c9a84c] flex items-center justify-center transition-colors">
                                 {/* Replace with <img src={s.src} alt={s.name} className="w-4 h-4 object-contain" /> */}
-                                <span className="text-white text-[10px] font-bold">{s.name}</span>
+                                <img src={s.src} alt={s.name} className="w-4 h-4 object-contain" />
                             </a>
                         ))}
                     </div>

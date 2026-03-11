@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 
- const store = configureStore({
+const dummyReducer = (state = {}) => state;
+
+const store = configureStore({
     reducer: {
-        
+        app: dummyReducer
     },
 })
+
 export default store;

@@ -129,28 +129,8 @@ export const ACTIVITIES_DATA = [
 ];
 
 export const EXPLORE_DATA = [
-    {
-        number: "01",
-        title: "Évasion en Yacht",
-        desc: "Découvrez Saïdia, la perle de la Méditerranée...",
-        video: "/locales/assets/video.mp4"
-    },
-    {
-        number: "02",
-        title: "Plages Dorées",
-        desc: "14 km de sable fin et d'eaux turquoise...",
-        video: "/locales/assets/video.mp4"
-    },
-    {
-        number: "03",
-        title: "Nature & Forêts",
-        desc: "Explorez les forêts verdoyantes...",
-        video: "/locales/assets/video.mp4"
-    },
-    {
-        number: "04",
-        title: "Marina & Loisirs",
-        desc: "Promenez-vous le long de la marina...",
-        video: "/locales/assets/video.mp4"
-    }
+    { number: "01", title: "Évasion en Yacht", desc: "...", video: "/locales/assets/yacht.mp4", image: "/locales/assets/yacht.png" },
+    { number: "02", title: "Plages Dorées", desc: "...", video: "/locales/assets/beach.mp4", image: "/locales/assets/beach.png" },
+    { number: "03", title: "Nature & Forêts", desc: "...", video: "/locales/assets/forest.mp4", image: "/locales/assets/forest.png" },
+    { number: "04", title: "Marina & Loisirs", desc: "...", video: "/locales/assets/marina.mp4", image: "/locales/assets/marina.png" },
 ];

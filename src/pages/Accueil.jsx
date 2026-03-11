@@ -147,21 +147,21 @@ function Acceuil() {
             subtitle: "Chanter ensemble",
             desc: "Musique live · Concert · Karaoké\nSpectacle de talents",
             button: "SING!",
-            image: "/locales/assets/.png"
+            image: "/locales/assets/chanter.png"
         },
         {
             title: "ACCRO A LA FÊTE",
             subtitle: "Danse toute la nuit",
             desc: "Club de nuit · Soirée · Vie nocturne\nTournée des bars",
             button: "DANCE!",
-            image: "/locales/assets/.png"
+            image: "/locales/assets/acro.png"
         },
         {
             title: "GAME ZONE",
             subtitle: "Prêt à gagner ?",
             desc: "Soirée Quiz · Team Building\nJeux de société",
             button: "PLAY!",
-            image: "/locales/assets/.png"
+            image: "/locales/assets/games.png"
         }
     ];
     //explore slider
@@ -169,25 +169,29 @@ function Acceuil() {
         {
             number: "01",
             title: "Évasion en Yacht",
-            desc: "Découvrez Saïdia, la perle de la Méditerranée...",
+            desc: "...",
+            image: "/locales/assets/yacht.png",
             video: "/locales/assets/yacht.mp4"
         },
         {
             number: "02",
             title: "Plages Dorées",
-            desc: "14 km de sable fin et d'eaux turquoise...",
+            desc: "...",
+            image: "/locales/assets/1stvideoph.png",
             video: "/locales/assets/beach.mp4"
         },
         {
             number: "03",
             title: "Nature & Forêts",
-            desc: "Explorez les forêts verdoyantes...",
+            desc: "...",
+            image: "/locales/assets/forest.png",
             video: "/locales/assets/forest.mp4"
         },
         {
             number: "04",
             title: "Marina & Loisirs",
-            desc: "Promenez-vous le long de la marina...",
+            desc: "...",
+            image: "/locales/assets/marina.png",
             video: "/locales/assets/marina.mp4"
         }
     ];
@@ -198,6 +202,8 @@ function Acceuil() {
     const current = exploreItems[exploreIndex];
     const next = exploreItems[(exploreIndex + 1) % exploreItems.length];
 
+
+    console.log("index:", exploreIndex)
     return (
         <>
             {/* Hero Slider */}
@@ -469,8 +475,8 @@ function Acceuil() {
                             </div>
                         </div>
 
-                        {/* RIGHT SIDE - STACKED IMAGES FROM DATA */}
-                        <div className="lg:w-[55%] relative h-[380px] sm:h-[450px] md:h-[500px]">
+                        {/* RIGHT SIDE - STACKED IMAGES - Responsive */}
+                        <div className="w-full lg:w-[55%] relative h-[280px] sm:h-[350px] md:h-[420px] lg:h-[450px] order-1 lg:order-2 mb-8 lg:mb-0">
                             {restaurantData.map((restaurant, index) => {
                                 const offset = index - currentRestaurantIndex;
                                 const isVisible = offset >= 0 && offset < 3;
@@ -482,46 +488,46 @@ function Acceuil() {
                                         key={restaurant.id}
                                         onClick={() => setCurrentRestaurantIndex(index)}
                                         className={`
-                                            absolute left-0 right-0 transition-all duration-500 ease-out cursor-pointer
-                                            ${index === currentRestaurantIndex
+                                absolute left-0 right-0 transition-all duration-500 ease-out cursor-pointer
+                                ${index === currentRestaurantIndex
                                                 ? "top-0 scale-100 z-30 opacity-100"
                                                 : index === currentRestaurantIndex + 1
-                                                    ? "top-6 scale-95 z-20 opacity-80"
-                                                    : "top-12 scale-90 z-10 opacity-60"
+                                                    ? "top-4 sm:top-6 scale-[0.97] sm:scale-95 z-20 opacity-80"
+                                                    : "top-8 sm:top-12 scale-[0.94] sm:scale-90 z-10 opacity-60"
                                             }
-                                        `}
+                            `}
                                     >
-                                        <div className="rounded-xl shadow-2xl overflow-hidden border border-gray-100 mx-auto max-w-[90%] sm:max-w-full">
+                                        <div className="rounded-lg sm:rounded-xl overflow-hidden border border-gray-100 mx-auto w-[95%] sm:w-full max-w-[400px] sm:max-w-none">
                                             <img
                                                 src={restaurant.image}
                                                 alt={restaurant.title}
-                                                className="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover"
+                                                className="w-full h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] object-cover"
                                             />
                                         </div>
                                     </div>
                                 );
                             })}
 
-                            {/* Navigation */}
-                            <div className="absolute -bottom-12 left-0 right-0 flex justify-center items-center gap-4">
+                            {/* Navigation - Responsive */}
+                            <div className="absolute -bottom-10 sm:-bottom-12 left-0 right-0 flex justify-center items-center gap-3 sm:gap-4">
                                 <button
                                     onClick={prevRestaurant}
-                                    className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                                     </svg>
                                 </button>
 
-                                <div className="w-10 h-10 rounded-full bg-[#1a3c5e] text-white flex items-center justify-center text-xs font-semibold">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1a3c5e] text-white flex items-center justify-center text-[10px] sm:text-xs font-semibold">
                                     {currentRestaurantIndex + 1}/{restaurantData.length}
                                 </div>
 
                                 <button
                                     onClick={nextRestaurant}
-                                    className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white"
+                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#1a3c5e] hover:text-[#1a3c5e] transition-colors bg-white"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                     </svg>
                                 </button>
@@ -618,61 +624,72 @@ function Acceuil() {
                         </div>
 
                         {/* Right — Image Slider */}
-                        <div className="lg:w-3/5 relative flex items-center gap-3">
+                        <div className="lg:w-3/5 relative h-[420px] overflow-hidden group">
+                            
+                            {/* Sliding Track */}
+                            <div 
+                                className="flex transition-transform duration-700 ease-in-out h-full"
+                                style={{ transform: `translateX(-${exploreIndex * 100}%)` }}
+                            >
+                                {exploreItems.map((item, idx) => (
+                                    <div key={idx} className="min-w-full h-full px-2 relative">
+                                        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl">
+                                            {idx === 0 ? (
+                                                <video
+                                                    src={item.video}
+                                                    className="w-full h-full object-cover"
+                                                    autoPlay muted loop playsInline
+                                                    poster={item.image}
+                                                />
+                                            ) : (
+                                                <img 
+                                                    src={item.image} 
+                                                    alt={item.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            )}
+                                            {/* Gradient Overlay for better text visibility */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                                            
+                                            <span className="absolute bottom-6 left-6 text-7xl font-black text-white/20 leading-none select-none">
+                                                {item.number}
+                                            </span>
 
-                            {/* Prev image (peek left) */}
-                            <div className="relative w-[20%] shrink-0 rounded-lg overflow-hidden shadow-md opacity-50 cursor-pointer" onClick={prevExplore}>
-                                <video
-                                    src={exploreItems[(exploreIndex - 1 + exploreItems.length) % exploreItems.length].video}
-                                    className="w-full h-[280px] object-cover"
-                                    muted
-                                    loop
-                                    autoPlay
-                                    poster="/locales/assets/.png"
-                                />
-                                {/* Prev arrow */}
-                                <button onClick={prevExplore}
-                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/60 hover:bg-white flex items-center justify-center text-[#1a3c5e] shadow transition-colors">
-                                    ←
-                                </button>
+                                            {/* Play button indicator - only show for video */}
+                                            {idx === 0 && (
+                                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/50 flex items-center justify-center hover:bg-white/40 transition-all duration-300">
+                                                    <span className="text-white text-2xl ml-1">▶</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
 
-                            {/* Main image */}
-                            <div className="relative w-[60%] shrink-0 rounded-lg overflow-hidden shadow-2xl z-10">
-                                <video
-                                    src={current.video}
-                                    className="w-full h-[420px] object-cover"
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    poster="/locales/assets/yacht.png"
-                                />
-                                <span className="absolute bottom-4 left-4 text-6xl font-black text-white/20 leading-none select-none">
-                                    {current.number}
-                                </span>
-                                <button className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white/30 backdrop-blur-sm border-2 border-white flex items-center justify-center hover:bg-white/50 transition-colors">
-                                    <span className="text-white text-xl ml-1">▶</span>
-                                </button>
-                            </div>
+                            {/* Navigation Arrows */}
+                            <button 
+                                onClick={prevExplore}
+                                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-30 opacity-0 group-hover:opacity-100"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
+                            <button 
+                                onClick={nextExplore}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-30 opacity-0 group-hover:opacity-100"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
 
-                            {/* Next image (peek right) */}
-                            <div className="relative w-[20%] shrink-0 rounded-lg overflow-hidden shadow-md opacity-50 cursor-pointer" onClick={nextExplore}>
-                                <video
-                                    src={exploreItems[(exploreIndex + 1) % exploreItems.length].video}
-                                    className="w-full h-[280px] object-cover"
-                                    muted
-                                    loop
-                                    autoPlay
-                                    poster="/locales/assets/.png"
-                                />
-                                {/* Next arrow */}
-                                <button onClick={nextExplore}
-                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/60 hover:bg-white flex items-center justify-center text-[#1a3c5e] shadow transition-colors">
-                                    →
-                                </button>
+                            {/* Info bar / progress */}
+                            <div className="absolute top-6 left-6 right-6 flex justify-between items-center z-30">
+                                <div className="text-white font-bold tracking-widest text-xs bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10">
+                                    {exploreItems[exploreIndex].number} / 0{exploreItems.length}
+                                </div>
                             </div>
-
                         </div>
                     </div>
 

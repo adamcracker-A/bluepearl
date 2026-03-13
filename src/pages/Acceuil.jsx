@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { FaArrowRight } from "react-icons/fa";
 import { images, rooms, offers, restaurantData, activities, exploreItems } from '../constants/accueilData';
+import HeroSlider from '../components/common/acceuil/Hero';
+import SearchSection from '../components/common/acceuil/Searchsection';
+import Quotesection from '../components/common/acceuil/Quotesection';
+import VideoSection from '../components/common/acceuil/VideoSection';
+import RoomSlider from '../components/common/acceuil/RoomSlider';
 
 function Acceuil() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,11 +13,10 @@ function Acceuil() {
     const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(0);
     const [exploreIndex, setExploreIndex] = useState(0);
 
-    // just logic, no data 🎉
+    // just logic, 
     const prevImage = () => setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
     const nextImage = () => setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-    const currentRoom = rooms[roomIndex];
     const prevRoom = () => setRoomIndex((prev) => (prev === 0 ? rooms.length - 1 : prev - 1));
     const nextRoom = () => setRoomIndex((prev) => (prev === rooms.length - 1 ? 0 : prev + 1));
 
@@ -29,166 +32,33 @@ function Acceuil() {
     const current = exploreItems[exploreIndex];
     const prevExplore = () => setExploreIndex((prev) => (prev === 0 ? exploreItems.length - 1 : prev - 1));
     const nextExplore = () => setExploreIndex((prev) => (prev === exploreItems.length - 1 ? 0 : prev + 1));
+
     return (
         <>
-            {/* Hero Slider */}
-            <div
-                className="w-full relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] bg-cover bg-center bg-no-repeat pt-28 sm:pt-32 md:pt-36 px-4 sm:px-8 transition-all duration-500 ease-in-out"
-                style={{ backgroundImage: `url('${images[currentIndex]}')` }}
-            >
-                <button onClick={prevImage} className="absolute left-2 sm:left-4 top-[65%] sm:top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-1.5 sm:p-2 rounded-full transition-colors z-20">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 sm:w-8 sm:h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-                <button onClick={nextImage} className="absolute right-2 sm:right-4 top-[65%] sm:top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-1.5 sm:p-2 rounded-full transition-colors z-20">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 sm:w-8 sm:h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
-                </button>
-                <div className="relative z-10 text-center sm:text-left mx-auto sm:mx-0 max-w-4xl">
-                    <p className="text-xl sm:text-2xl font-bold text-white drop-shadow-md">Une Expérience Signée Excellence</p>
-                    <p className="text-lg sm:text-xl text-white mt-2 drop-shadow-md">Un bien-être qui va au-delà</p>
-                </div>
-                <div className="absolute bottom-9 sm:bottom-12 left-0 right-0 flex justify-center gap-2 z-20">
-                    {images.map((_, idx) => (
-                        <button key={idx} onClick={() => setCurrentIndex(idx)}
-                            className={`w-2.5 h-2.5 rounded-full transition-all ${idx === currentIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'}`} />
-                    ))}
-                </div>
-            </div>
+            <HeroSlider
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+                prevImage={prevImage}
+                nextImage={nextImage}
+            />
+            <SearchSection />
 
-            {/* Search Bar */}
-            <div className="container mx-auto px-4">
-                <div className="bg-white shadow-lg border-t-4 border-[#c9a84c] rounded -mt-10 relative z-10 p-6">
-                    <div className="flex flex-col lg:flex-row gap-4 items-end justify-between w-full">
-                        <div className="flex-1 w-full lg:w-auto">
-                            <label className="block text-[10px] xl:text-xs font-bold uppercase text-[#1a3c5e] tracking-wider mb-1 whitespace-nowrap">Localisation</label>
-                            <input type="text" className="w-full border border-gray-200 rounded px-2 py-2 text-xs xl:text-sm" value="Saïdia, Morocco" readOnly />
-                        </div>
-                        <div className="flex-[1.5] w-full lg:w-auto">
-                            <label className="block text-[10px] xl:text-xs font-bold uppercase text-[#1a3c5e] tracking-wider mb-1 whitespace-nowrap">Arrivée / Départ</label>
-                            <input type="date" className="w-full border border-gray-200 rounded px-2 py-2 text-xs xl:text-sm" />
-                        </div>
-                        <div className="flex-1 w-full lg:w-auto">
-                            <label className="block text-[10px] xl:text-xs font-bold uppercase text-[#1a3c5e] tracking-wider mb-1 whitespace-nowrap">Chambres</label>
-                            <select className="w-full border border-gray-200 rounded px-2 py-2 text-xs xl:text-sm">
-                                <option>1 Chambre</option><option>2 Chambres</option><option>3 Chambres</option>
-                            </select>
-                        </div>
-                        <div className="flex-1 w-full lg:w-auto">
-                            <label className="block text-[10px] xl:text-xs font-bold uppercase text-[#1a3c5e] tracking-wider mb-1 whitespace-nowrap">Adultes</label>
-                            <select className="w-full border border-gray-200 rounded px-2 py-2 text-xs xl:text-sm">
-                                <option>1 Adulte</option><option>2 Adultes</option><option>3 Adultes</option>
-                            </select>
-                        </div>
-                        <div className="flex-1 w-full lg:w-auto">
-                            <label className="block text-[10px] xl:text-xs font-bold uppercase text-[#1a3c5e] tracking-wider mb-1 whitespace-nowrap">Enfants</label>
-                            <select className="w-full border border-gray-200 rounded px-2 py-2 text-xs xl:text-sm">
-                                <option>1 Enfant</option><option>2 Enfants</option><option>3 Enfants</option>
-                            </select>
-                        </div>
-                        <div className="flex-1 w-full lg:w-auto">
-                            <label className="block text-[10px] xl:text-xs font-bold uppercase text-[#1a3c5e] tracking-wider mb-1 whitespace-nowrap">CODE PROMO</label>
-                            <input type="text" className="w-full border border-gray-200 rounded px-2 py-2 text-xs xl:text-sm" />
-                        </div>
-                        <div className="w-full lg:w-auto shrink-0">
-                            <button className="w-full bg-[#c9a84c] hover:bg-[#a8883a] text-white py-[9px] px-4 rounded transition-colors font-semibold text-xs xl:text-sm whitespace-nowrap">
-                                Voir les disponibilités →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Quotesection />
 
-            {/* Quote / Image */}
-            <div className="flex flex-col items-center justify-center mt-12 mb-8 px-4 gap-6">
-                <img src="/locales/assets/groupe 1.png" alt="description" className="max-w-full h-auto" />
-                <p className="text-center text-sm md:text-base lg:text-lg max-w-4xl text-gray-700 italic font-medium leading-relaxed">
-                    " Chaque espace reflète mon désir de satisfaire pleinement mes invités, en offrant un univers où confort, raffinement et bien-être se conjuguent "
-                </p>
-            </div>
-
-            <hr className="border-[#c9a84c] border-t-2" /> <br />
-
-            {/* Video Section */}
-            <div className="relative w-full h-[400px] bg-black overflow-hidden">
-                {/* Replace src with your real video path later */}
-                <video
-                    className="w-full h-full object-cover opacity-80"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster="/locales/assets/1stvideoph.png"
-                >
-                    <source src="/locales/assets/video.mp4" type="video/mp4" />
-                </video>
-
-                {/* Play button overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <button className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white flex items-center justify-center hover:bg-white/40 transition-colors">
-                        <span className="text-white text-3xl ml-2">▶</span>
-                    </button>
-                </div>
-            </div> <br />
-
-            <hr className="border-[#c9a84c] border-t-2" />
-
+            <VideoSection />
+            {/* Chambres titres*/}
             <div className="flex flex-col items-center justify-center mt-12 mb-8 px-4 gap-6">
                 <img src="/locales/assets/groupe 1.png" alt="description" className="max-w-full h-auto" />
             </div>
 
             {/* Room Slider */}
-            <section className="bg-[#0f2c5c] py-16 md:py-24 mt-12">
-                <div className="container max-w-5xl mx-auto px-4 sm:px-12 relative">
-                    <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-                        <button className="border border-gray-400 text-white px-6 py-2 text-xs sm:text-sm tracking-widest hover:bg-white/10 transition-colors">SUITES ▼</button>
-                        <button className="border border-gray-400 text-white px-6 py-2 text-xs sm:text-sm tracking-widest hover:bg-white/10 transition-colors">SÉLECTIONNEZ VOTRE VUE ▼</button>
-                    </div>
-                    <div className="flex flex-col lg:flex-row items-center relative">
-                        <div className="w-full lg:w-[45%] bg-[#efefef] p-6 sm:p-10 shadow-2xl relative z-10 order-2 lg:order-1 mt-[-2rem] lg:mt-0 lg:-mr-12 rounded-sm">
-                            <h3 className="text-xl sm:text-2xl font-semibold mb-4 flex items-center gap-3 text-[#1a3c5e]">
-                                <span className="text-[#c9a84c] text-xl">✦</span>
-                                {currentRoom.name}
-                            </h3>
-                            <hr className="mb-5 border-gray-300" />
-                            <p className="text-sm text-gray-600 mb-8 leading-relaxed">{currentRoom.description}</p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2 text-gray-700 text-sm mb-8 font-medium">
-                                {currentRoom.icons.map((item, idx) => (
-                                    <div key={idx} className="flex items-center gap-3">
-                                        <span className="text-[#c9a84c] text-lg">{item.icon}</span>
-                                        {item.label}
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <button className="border border-[#c9a84c] text-[#0f2c5c] px-5 py-2.5 text-xs font-bold tracking-wider hover:bg-[#c9a84c] hover:text-white transition-colors w-full sm:w-auto">PLUS DE DÉTAILS →</button>
-                                <button className="bg-[#c9a84c] text-white px-5 py-2.5 text-xs font-bold tracking-wider hover:bg-[#a8883a] transition-colors w-full sm:w-auto">RÉSERVEZ →</button>
-                            </div>
-                        </div>
-                        <div className="w-full lg:w-[65%] relative order-1 lg:order-2">
-                            <img src={currentRoom.image} alt={currentRoom.name} className="w-full h-[300px] sm:h-[400px] lg:h-[450px] object-cover rounded-sm shadow-lg" />
-                            <button onClick={prevRoom} className="absolute left-2 lg:-left-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 flex items-center justify-center rounded-full transition-colors z-20">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                </svg>
-                            </button>
-                            <button onClick={nextRoom} className="absolute right-2 lg:-right-6 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white w-10 h-10 flex items-center justify-center rounded-full transition-colors z-20">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex justify-center gap-3 mt-10">
-                        {rooms.map((_, idx) => (
-                            <button key={idx} onClick={() => setRoomIndex(idx)}
-                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === roomIndex ? "bg-[#c9a84c] scale-125" : "bg-white/40 hover:bg-white/70"}`} />
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <RoomSlider
+                roomIndex={roomIndex}
+                setRoomIndex={setRoomIndex}
+                prevRoom={prevRoom}
+                nextRoom={nextRoom}
+                rooms={rooms}
+            />
 
             {/* ✦ Offres Exclusives Section */}
             <section className="py-16 px-4">
@@ -253,89 +123,68 @@ function Acceuil() {
                 <img src="/locales/assets/groupe 2.png" alt="description" className="max-w-full h-auto" />
             </div>
 
-            {/* Restaurant Section - Stacked Cards with Left Content */}
-            {/* Restaurant Section - Dynamic Left Content, Stacked Right Images */}
+            {/* Restaurant Section - Dynamic Content */}
             <section className="py-16 md:py-24 bg-[#faf8f5]">
                 <div className="container mx-auto max-w-6xl px-4">
-                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+                    <div className="relative max-w-5xl mx-auto">
 
-                        {/* LEFT CONTENT - DYNAMIC FROM DATA */}
-                        <div className="lg:w-[45%] flex flex-col justify-center transition-all duration-500">
-                            {/* Logo/Icon + Title */}
-                            <div className="flex items-center gap-3 mb-6">
-                                <span className="text-[#c9a84c] text-xl">✦</span>
-                                <h2 className="text-2xl md:text-3xl font-light text-[#1a3c5e]">
+                        {/* Back card 1 */}
+                        <div className="absolute top-10 left-0 w-full h-full bg-gray-200 rounded-xl"></div>
+
+                        {/* Back card 2 */}
+                        <div className="absolute top-5 left-0 w-full h-full bg-gray-100 rounded-xl"></div>
+
+                        {/* Main Card */}
+                        <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[500px]">
+
+                            {/* Left Side - Content */}
+                            <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
+                                <h4 className="text-[#c9a84c] font-bold tracking-widest text-[10px] mb-3 uppercase flex items-center gap-2">
+                                    <img src="/locales/assets/star.png" alt="icon" className="w-4 h-4 object-contain" /> EXPÉRIENCE CULINAIRE
+                                </h4>
+                                <h2 className="text-3xl md:text-4xl font-bold text-[#1a3c5e] mb-6 leading-tight">
                                     {currentRestaurant.title}
                                 </h2>
-                            </div>
 
-                            {/* Description */}
-                            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-8">
-                                {currentRestaurant.description}
-                            </p>
+                                <p className="text-gray-600 mb-8 leading-relaxed text-sm md:text-base">
+                                    {currentRestaurant.description}
+                                </p>
 
-                            {/* Opening Hours - Dynamic */}
-                            <div className="mb-8">
-                                <h3 className="text-[#1a3c5e] font-semibold text-sm mb-3">Open Daily :</h3>
-                                <ul className="space-y-2">
+                                <div className="space-y-4 mb-10">
                                     {currentRestaurant.hours.map((hour, idx) => (
-                                        <li key={idx} className="flex items-center gap-2 text-gray-600 text-sm">
-                                            <span className="text-[#c9a84c]">→</span>
-                                            <span>{hour.label} : {hour.time}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Buttons - Dynamic */}
-                            <div className="flex flex-wrap gap-4">
-                                <button className="flex items-center gap-2 px-6 py-3 border border-[#c9a84c] text-[#1a3c5e] text-xs font-bold tracking-wider hover:bg-[#c9a84c] hover:text-white transition-all duration-300 rounded-sm">
-                                    {currentRestaurant.secondaryButton.text}
-                                    <FaArrowRight className="text-sm" />
-                                </button>
-                                <button className="flex items-center gap-2 px-6 py-3 bg-[#c9a84c] text-white text-xs font-bold tracking-wider hover:bg-[#a8883a] transition-all duration-300 rounded-sm">
-                                    {currentRestaurant.primaryButton.text}
-                                    <FaArrowRight className="text-sm" />
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* RIGHT SIDE - STACKED IMAGES - Responsive */}
-                        <div className="w-full lg:w-[55%] relative h-[280px] sm:h-[350px] md:h-[420px] lg:h-[450px] order-1 lg:order-2 mb-8 lg:mb-0">
-                            {restaurantData.map((restaurant, index) => {
-                                const offset = index - currentRestaurantIndex;
-                                const isVisible = offset >= 0 && offset < 3;
-
-                                if (!isVisible) return null;
-
-                                return (
-                                    <div
-                                        key={restaurant.id}
-                                        onClick={() => setCurrentRestaurantIndex(index)}
-                                        className={`
-                                absolute left-0 right-0 transition-all duration-500 ease-out cursor-pointer
-                                ${index === currentRestaurantIndex
-                                                ? "top-0 scale-100 z-30 opacity-100"
-                                                : index === currentRestaurantIndex + 1
-                                                    ? "top-4 sm:top-6 scale-[0.97] sm:scale-95 z-20 opacity-80"
-                                                    : "top-8 sm:top-12 scale-[0.94] sm:scale-90 z-10 opacity-60"
-                                            }
-                            `}
-                                    >
-                                        <div className="rounded-lg sm:rounded-xl overflow-hidden border border-gray-100 mx-auto w-[95%] sm:w-full max-w-[400px] sm:max-w-none">
-                                            <img
-                                                src={restaurant.image}
-                                                alt={restaurant.title}
-                                                className="w-full h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] object-cover"
-                                            />
+                                        <div key={idx} className="flex justify-between items-center border-b border-gray-100 pb-2">
+                                            <span className="font-bold text-[#1a3c5e] text-[11px] uppercase tracking-wider">{hour.label}</span>
+                                            <span className="text-gray-500 text-xs font-medium">{hour.time}</span>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-4">
+                                    <button className="bg-[#c9a84c] text-white px-7 py-3.5 text-[10px] font-bold tracking-widest hover:bg-[#a8883a] transition-all duration-300 rounded-sm shadow-lg uppercase">
+                                        {currentRestaurant.primaryButton.text} →
+                                    </button>
+                                    <button className="border border-[#1a3c5e] text-[#1a3c5e] px-7 py-3.5 text-[10px] font-bold tracking-widest hover:bg-[#1a3c5e] hover:text-white transition-all duration-300 rounded-sm uppercase">
+                                        {currentRestaurant.secondaryButton.text}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Right Side - Image */}
+                            <div className="w-full md:w-1/2 relative min-h-[350px] md:min-h-full overflow-hidden">
+                                <img
+                                    key={currentRestaurantIndex}
+                                    src={currentRestaurant.image}
+                                    alt={currentRestaurant.title}
+                                    className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out hover:scale-110 animate-fadeIn"
+                                />
+
+                            </div>
+
                         </div>
+
                     </div>
 
-                    {/* Navigation - Centered at the bottom of the section */}
+                    {/* Navigation */}
                     <div className="flex justify-center items-center gap-3 sm:gap-4 mt-12 sm:mt-16">
                         <button
                             onClick={prevRestaurant}
@@ -433,7 +282,7 @@ function Acceuil() {
                                 </h2>
                             </div>
                             <h4 className="text-lg font-semibold text-[#c9a84c] flex items-center gap-2 mb-3">
-                                <span>✦</span> {current.title}
+                                <img src="/locales/assets/star.png" alt="icon" className="w-4 h-4 object-contain" /> {current.title}
                             </h4>
                             <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">
                                 {current.desc}

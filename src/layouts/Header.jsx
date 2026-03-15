@@ -26,12 +26,15 @@ function Header() {
         <div className="bg-transparent text-white">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
 
-                {/* Left — Text logo */}
+                {/* Left — Hamburger Menu */}
                 <div className="flex-1">
-                    <span className="block text-[#c9a84c] font-bold text-base sm:text-xl tracking-widest">BLUE PEARL BEACH</span>
-                    <span className="block text-gray-300 text-[10px] sm:text-xs tracking-[4px]">SAÏDIA</span>
+                    <button className="flex items-center gap-2 border border-[#4a90b8] px-3 py-2">
+                        <div className="flex flex-col gap-[5px]">
+                            <img src="/locales/assets/menu.png" alt="menu" className="w-5 h-5 object-contain" />
+                        </div>
+                        <span className="text-white text-xs tracking-widest font-medium">MENU</span>
+                    </button>
                 </div>
-
                 {/* Center — Logo image */}
                 <div className="flex-1 flex justify-center">
                     <img src="/locales/assets/Frame.png" alt="Blue Pearl Logo" className="h-12 sm:h-16 object-contain" />
@@ -67,7 +70,7 @@ function Header() {
                         )}
                     </div>
 
-                    <button className="bg-white hover:bg-[#a8883a] text-blue px-3 sm:px-5 py-2 text-xs sm:text-sm transition-colors whitespace-nowrap">
+                    <button className="bg-white hover:bg-[#a8883a] hover:text-white font-medium text-[#a8883a] px-3 sm:px-5 py-2 text-xs sm:text-sm transition-colors whitespace-nowrap">
                         Réserver →
                     </button>
                 </div>

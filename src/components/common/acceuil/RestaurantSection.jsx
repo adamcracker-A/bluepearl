@@ -35,18 +35,18 @@ function RestaurantSection({ currentRestaurant, prevRestaurant, nextRestaurant, 
                     <div className="relative max-w-5xl mx-auto">
 
                         {/* Back card 2 */}
-                        <div className="absolute top-10 right-0 w-1/2 h-full rounded-xl overflow-hidden opacity-40 translate-x-6 scale-95 z-0">
+                        <div className="absolute bottom-[-64px] right-8 left-8 h-[92%] rounded-xl overflow-hidden z-0 flex bg-white shadow-xl">
                             <img
                                 src={restaurantData[nextNextIndex].image}
-                                className="w-full h-full object-cover"
+                                className="w-1/2 h-full object-cover ml-auto"
                             />
                         </div>
 
                         {/* Back card 1 */}
-                        <div className="absolute top-5 right-0 w-1/2 h-full rounded-xl overflow-hidden opacity-60 translate-x-3 scale-97 z-0">
+                        <div className="absolute bottom-[-32px] right-4 left-4 h-[96%] rounded-xl overflow-hidden z-[5] flex bg-white shadow-xl">
                             <img
                                 src={restaurantData[nextIndex].image}
-                                className="w-full h-full object-cover"
+                                className="w-1/2 h-full object-cover ml-auto"
                             />
                         </div>
 
@@ -98,7 +98,7 @@ function RestaurantSection({ currentRestaurant, prevRestaurant, nextRestaurant, 
 
                         </div>
 
-                    </div>
+                    </div> <br />
 
                     {/* Navigation */}
                     <div className="flex justify-center items-center gap-3 sm:gap-4 mt-12 sm:mt-16">

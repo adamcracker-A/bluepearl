@@ -24,7 +24,7 @@ export const rooms = [
     {
         name: "Deluxe Suite",
         description: "Une autre suite élégante avec tout le confort dont vous rêvez.",
-        image: "/locales/assets/groupe 1.png",
+        image: "/locales/assets/images/logo/groupe.png",
         icons: [
             { icon: <FaUser />, label: "1-2 Personnes" },
             { icon: <FaBath />, label: "Douche" },

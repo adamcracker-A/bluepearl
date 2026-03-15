@@ -12,6 +12,12 @@
   font-display: swap;
 }
 
+/*==========font-family==========*/
+
+body {
+  font-family: var(--font-sans);
+}
+
 /* ========== Theme Tokens ========== */
 @theme inline {
   --font-carmine: "Carmine", ui-sans-serif, system-ui;

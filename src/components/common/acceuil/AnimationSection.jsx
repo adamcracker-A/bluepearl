@@ -41,7 +41,7 @@ function AnimationSection({ activities, prevActivity, nextActivity }) {
                         {activities.map((item, index) => (
                             <div
                                 key={index}
-                                className="relative h-[420px] rounded-2xl overflow-hidden group shadow-lg"
+                                className={`relative h-[420px] rounded-2xl overflow-hidden group shadow-lg ${index === 1 ? 'hidden sm:block' : ''} ${index === 2 ? 'hidden lg:block' : ''}`}
                             >
                                 <img
                                     src={item.image}

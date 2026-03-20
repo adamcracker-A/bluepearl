@@ -33,9 +33,11 @@ function Acceuil() {
     const nextOffer = () => setOfferIndex((prev) => (prev >= offers.length - visibleOffers ? 0 : prev + 1));
 
     const visibleActivities = 3;
-    const currentActivities = activities.slice(activityIndex, activityIndex + visibleActivities);
-    const prevActivity = () => setActivityIndex((prev) => (prev === 0 ? Math.max(0, activities.length - visibleActivities) : prev - 1));
-    const nextActivity = () => setActivityIndex((prev) => (prev >= activities.length - visibleActivities ? 0 : prev + 1));
+    const currentActivities = Array.from({ length: visibleActivities }, (_, i) => 
+        activities[(activityIndex + i) % activities.length]
+    );
+    const prevActivity = () => setActivityIndex((prev) => (prev === 0 ? activities.length - 1 : prev - 1));
+    const nextActivity = () => setActivityIndex((prev) => (prev === activities.length - 1 ? 0 : prev + 1));
 
     const currentRestaurant = restaurantData[currentRestaurantIndex];
     const prevRestaurant = () => setCurrentRestaurantIndex((prev) => (prev === 0 ? restaurantData.length - 1 : prev - 1));

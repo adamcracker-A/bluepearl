@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
     const [open, setOpen] = useState(false);
@@ -28,12 +28,22 @@ function Navbar() {
                 <ul className="hidden lg:flex gap-8">
                     {links.map(link => (
                         <li key={link.to}>
-                            <Link
+                            <NavLink
                                 to={link.to}
-                                className="text-white text-sm font-semibold uppercase tracking-wide py-3 border-b-2 border-transparent hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all"
+                                className={({ isActive }) =>
+                                    `relative text-white text-sm font-semibold uppercase tracking-wide py-3 px-2 transition-all flex flex-col items-center
+        
+        after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2
+        after:h-[2.5px] after:bg-white after:rounded-[100%] after:transition-all after:duration-300
+        
+        ${isActive
+                                        ? 'after:w-16'
+                                        : 'after:w-0 hover:after:w-16'
+                                    }`
+                                }
                             >
                                 {link.label}
-                            </Link>
+                            </NavLink>
                         </li>
                     ))}
                 </ul>
@@ -44,13 +54,16 @@ function Navbar() {
                 <ul className="lg:hidden flex flex-col bg-black/70 border-t border-gray-100 px-4 pb-3">
                     {links.map(link => (
                         <li key={link.to}>
-                            <Link
+                            <NavLink
                                 to={link.to}
                                 onClick={() => setOpen(false)}
-                                className="block text-white font-semibold py-3 border-b border-gray-100 hover:text-[#c9a84c] transition-colors"
+                                className={({ isActive }) =>
+                                    `block text-white font-semibold py-3 border-b transition-colors ${isActive ? 'border-[#c9a84c] text-[#c9a84c]' : 'border-gray-100'
+                                    }`
+                                }
                             >
                                 {link.label}
-                            </Link>
+                            </NavLink>
                         </li>
                     ))}
                 </ul>

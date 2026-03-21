@@ -2,28 +2,12 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
     return (
         <>
             <section className="flex flex-col items-center justify-center mt-16 mb-12 px-4 text-center">
-                {/* Logo / Icon */}
-                <img
-                    src="/locales/assets/images/logo/groupe.png"
-                    alt="logo"
-                    className="w-20 md:w-24 mb-6"
-                />
-
-                {/* Title */}
-                <h2 className="text-2xl md:text-3xl lg:text-4xl tracking-[0.1em] text-[#1f3555] font-normal">
-                    QUE FAIRE À SAÏDIA
-                </h2>
-
-                {/* Subtitle */}
-                <p className="text-xs md:text-lg text-[#1f3555] mt-2">
-                    VUES, LUXE, SOUVENIRS
-                </p>
-
-                {/* Gold Line */}
+                <img src="/locales/assets/images/logo/groupe.png" alt="logo" className="w-20 md:w-24 mb-6" />
+                <h2 className="text-2xl md:text-3xl lg:text-4xl tracking-[0.1em] text-[#1f3555] font-normal">QUE FAIRE À SAÏDIA</h2>
+                <p className="text-xs md:text-lg text-[#1f3555] mt-2">VUES, LUXE, SOUVENIRS</p>
                 <div className="w-70 h-[2px] bg-[#c9a84c] mt-4 mb-8"></div>
             </section>
 
-            {/* ✦ Explore Saidia Section */}
             <section className="py-16 px-4 bg-white overflow-hidden">
                 <div className="container mx-auto max-w-6xl">
                     <div className="flex flex-col lg:flex-row items-center gap-10">
@@ -38,16 +22,10 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                             <h4 className="text-lg font-semibold text-[#c9a84c] flex items-center gap-2 mb-3">
                                 <img src="/locales/assets/star.png" alt="icon" className="w-4 h-4 object-contain" /> {current.title}
                             </h4>
-                            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">
-                                {current.desc}
-                            </p>
+                            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm">{current.desc}</p>
                             <div className="flex gap-4">
-                                <button className="border border-[#1a3c5e] text-[#1a3c5e] px-5 py-2.5 text-xs font-bold tracking-wider hover:bg-[#1a3c5e] hover:text-white transition-colors">
-                                    PLUS DE DÉTAILS →
-                                </button>
-                                <button className="bg-[#c9a84c] text-white px-5 py-2.5 text-xs font-bold tracking-wider hover:bg-[#a8883a] transition-colors">
-                                    RÉSERVEZ →
-                                </button>
+                                <button className="border border-[#1a3c5e] text-[#1a3c5e] px-5 py-2.5 text-xs font-bold tracking-wider hover:bg-[#1a3c5e] hover:text-white transition-colors">PLUS DE DÉTAILS →</button>
+                                <button className="bg-[#c9a84c] text-white px-5 py-2.5 text-xs font-bold tracking-wider hover:bg-[#a8883a] transition-colors">RÉSERVEZ →</button>
                             </div>
                         </div>
 
@@ -64,25 +42,13 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                     const isLeft = position === "left";
 
                                     const style = window.innerWidth < 1024 ? {
-                                        left: "0%",
-                                        transform: "none",
-                                        zIndex: 10,
-                                        width: "100%",
+                                        left: "0%", transform: "none", zIndex: 10, width: "100%",
                                     } : isCenter ? {
-                                        left: "50%",
-                                        transform: "translateX(-50%) scale(1)",
-                                        zIndex: 10,
-                                        width: "80%",
+                                        left: "50%", transform: "translateX(-50%) scale(1)", zIndex: 10, width: "80%",
                                     } : isLeft ? {
-                                        left: "0%",
-                                        transform: "translateX(-32%) scale(1)",
-                                        zIndex: 5,
-                                        width: "80%",
+                                        left: "0%", transform: "translateX(-32%) scale(1)", zIndex: 5, width: "80%",
                                     } : {
-                                        left: "100%",
-                                        transform: "translateX(-68%) scale(1)",
-                                        zIndex: 5,
-                                        width: "80%",
+                                        left: "100%", transform: "translateX(-68%) scale(1)", zIndex: 5, width: "80%",
                                     };
 
                                     return (
@@ -90,42 +56,26 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                             key={position}
                                             onClick={() => { if (!isCenter) prevExplore(); }}
                                             className="absolute top-0 h-full"
-                                            style={{
-                                                transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
-                                                cursor: isCenter ? "default" : "pointer",
-                                                ...style,
-                                            }}
+                                            style={{ transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)", cursor: isCenter ? "default" : "pointer", ...style }}
                                         >
-                                            <div className="relative w-full h-full rounded-xl overflow-hidden">
-                                                {/* Image — always shown as base */}
-                                                <img
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                    className="absolute inset-0 w-full h-full object-cover"
-                                                />
-                                                {/* Video — center only */}
+                                            <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden">
+                                                <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover z-0" />
                                                 {item.video && isCenter && (
-                                                    <video
-                                                        src={item.video}
-                                                        className="absolute inset-0 w-full h-full object-cover"
-                                                        autoPlay muted loop playsInline
-                                                    />
+                                                    <video src={item.video} className="absolute inset-0 w-full h-full object-cover z-0" autoPlay muted loop playsInline />
                                                 )}
-                                                {/* Slide number */}
                                                 <span className="absolute bottom-6 left-6 text-5xl md:text-7xl font-black text-white/20 leading-none select-none z-10">
                                                     {item.number}
                                                 </span>
-                                                {/* Play button - center video only */}
                                                 {item.video && isCenter && (
                                                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/50 flex items-center justify-center hover:bg-white/40 transition-all duration-300">
                                                         <span className="text-white text-2xl ml-1">▶</span>
                                                     </div>
                                                 )}
-                                                {/* Long arrow — inside the image, bottom right */}
-                                                <div className="absolute bottom-6 right-6 z-10 flex items-center gap-0">
-                                                    <div className="w-16 h-[2px] bg-white/70"></div>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 -ml-1 opacity-70">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                                                {/* Single arrow — inside the image */}
+                                                <div className="absolute bottom-6 right-6 z-10">
+                                                    <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <line x1="0" y1="10" x2="66" y2="10" stroke="white" strokeWidth="2" strokeOpacity="0.85" />
+                                                        <path d="M58 3L74 10L58 17" stroke="white" strokeWidth="2" strokeOpacity="0.85" strokeLinecap="round" strokeLinejoin="round" />
                                                     </svg>
                                                 </div>
                                             </div>
@@ -135,35 +85,20 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
 
                                 return (
                                     <>
-                                        {/* Background — Only shown on Desktop (lg+) */}
                                         <div className="hidden lg:block absolute inset-0 z-0 scale-[1.05] transition-all duration-700 ease-in-out translate-y-6">
-                                            <div className="relative w-full h-full">
-                                                <img
-                                                    src={adjacentItem.image}
-                                                    className="w-full h-full object-cover"
-                                                    alt="Peeking Background"
-                                                />
-                                            </div>
+                                            <img src={adjacentItem.image} className="w-full h-full object-cover" alt="Peeking Background" />
                                         </div>
-                                        {/* Center active image */}
                                         {renderCard(centerItem, "center")}
                                     </>
                                 );
                             })()}
 
-                            {/* Navigation Arrows */}
-                            <button
-                                onClick={prevExplore}
-                                className="absolute left-4 md:left-6 lg:left-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
-                            >
+                            <button onClick={prevExplore} className="absolute left-4 md:left-6 lg:left-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                                 </svg>
                             </button>
-                            <button
-                                onClick={nextExplore}
-                                className="absolute right-4 md:right-6 lg:right-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
-                            >
+                            <button onClick={nextExplore} className="absolute right-4 md:right-6 lg:right-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                 </svg>
@@ -178,7 +113,6 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === exploreIndex ? 'bg-[#1a3c5e] scale-125' : 'bg-gray-300 hover:bg-gray-400'}`} />
                         ))}
                     </div>
-
                 </div>
             </section>
         </>

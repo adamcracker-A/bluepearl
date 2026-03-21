@@ -48,8 +48,8 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                 {exploreItems.map((item, idx) => (
                                     <div key={idx} className="min-w-full h-full relative flex-shrink-0">
                                         <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover" />
-                                        {item.video && idx === exploreIndex && (
-                                            <video src={item.video} className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline />
+                                        {item.video && (
+                                            <video src={item.video} className="absolute inset-0 w-full h-full object-cover z-[5]" autoPlay muted loop playsInline />
                                         )}
                                         <span className="absolute bottom-5 left-5 text-5xl font-black text-white/20 leading-none select-none z-10">{item.number}</span>
                                     </div>
@@ -141,8 +141,8 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                         </div>
                     </div>
 
-                    {/* Dots */}
-                    <div className="flex justify-center gap-2 mt-10 ml-120">
+                    {/* Dots — centered under the images section on desktop, globally on mobile */}
+                    <div className="flex justify-center lg:ml-[40%] gap-2 mt-10">
                         {exploreItems.map((_, idx) => (
                             <button key={idx} onClick={() => setExploreIndex(idx)}
                                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === exploreIndex ? 'bg-[#1a3c5e] scale-125' : 'bg-gray-300 hover:bg-gray-400'}`} />

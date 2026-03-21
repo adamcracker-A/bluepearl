@@ -5,12 +5,12 @@ function HeroSlider({ currentIndex, setCurrentIndex, prevImage, nextImage }) {
         <>
             {/* Hero Slider */}
             <div
-                className="w-full relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[500px] bg-cover bg-center bg-no-repeat pt-28 sm:pt-32 md:pt-36 px-4 sm:px-8 transition-all duration-500 ease-in-out"
+                className="w-full relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] bg-cover bg-center bg-no-repeat pt-32 sm:pt-40 md:pt-44 px-4 sm:px-8 transition-all duration-500 ease-in-out"
                 style={{ backgroundImage: `url('${images[currentIndex]}')` }}
             >
 
                 {/* Text + Buttons grouped together on the left */}
-                <div className="left-20 relative z-10 text-left mx-0 max-w-4xl sm:pl-24">
+                <div className="left-10 relative z-10 text-left mx-0 max-w-4xl sm:pl-12">
 
                     <div className="sm:border-l-4 sm:border-[#c9a84c] sm:pl-4 mb-4">
                         <p className="text-xl sm:text-2xl font-bold text-white drop-shadow-md">Une Expérience Signée Excellence</p>

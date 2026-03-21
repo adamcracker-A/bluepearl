@@ -28,7 +28,7 @@ function Header() {
 
                 {/* Left — Hamburger Menu */}
                 <div className="flex-1">
-                    <button className="flex items-center gap-2 border border-[#4a90b8] px-3 py-2">
+                    <button className="flex items-center gap-2 px-3 py-2">
                         <div className="flex flex-col gap-[5px]">
                             <img src="/locales/assets/menu.png" alt="menu" className="w-5 h-5 object-contain" />
                         </div>

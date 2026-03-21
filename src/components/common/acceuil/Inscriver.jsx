@@ -26,10 +26,9 @@ function Inscriver() {
                 {/* Scroll to top button */}
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-[#1a3c5e] text-[#c9a84c] flex items-center justify-center text-xl hover:bg-[#0f2c5c] transition-colors"
-                    style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
+                    className="absolute right-8 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center text-xl transition-colors"
                 >
-                    ↑
+                    <img src="/locales/assets/arrow-up.png" alt="arrow-up" className="w-14 h-14 object-contain" />
                 </button>
 
             </section>

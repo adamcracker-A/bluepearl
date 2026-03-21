@@ -38,7 +38,7 @@ function RestaurantSection({ currentRestaurant, prevRestaurant, nextRestaurant, 
                         <div className="absolute bottom-[-64px] right-8 left-8 h-[92%] rounded-xl overflow-hidden z-0 flex bg-white shadow-xl">
                             <img
                                 src={restaurantData[nextNextIndex].image}
-                                className="w-1/2 h-full object-cover ml-auto"
+                                className="w-[52%] h-full object-cover ml-auto"
                             />
                         </div>
 
@@ -46,7 +46,7 @@ function RestaurantSection({ currentRestaurant, prevRestaurant, nextRestaurant, 
                         <div className="absolute bottom-[-32px] right-4 left-4 h-[96%] rounded-xl overflow-hidden z-[5] flex bg-white shadow-xl">
                             <img
                                 src={restaurantData[nextIndex].image}
-                                className="w-1/2 h-full object-cover ml-auto"
+                                className="w-[51%] h-full object-cover ml-auto"
                             />
                         </div>
 

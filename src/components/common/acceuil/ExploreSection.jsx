@@ -52,7 +52,7 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                         </div>
 
                         {/* Right — Peek Slider */}
-                        <div className="lg:w-3/5 relative h-[320px] md:h-[420px] group">
+                        <div className="lg:w-3/5 relative h-[350px] md:h-[480px] group">
                             {(() => {
                                 const total = exploreItems.length;
                                 const adjacentIdx = (exploreIndex + 1) % total;
@@ -64,29 +64,25 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                     const isLeft = position === "left";
 
                                     const style = window.innerWidth < 1024 ? {
-                                        // Mobile: Normal Full-Width Slide
                                         left: "0%",
                                         transform: "none",
                                         zIndex: 10,
                                         width: "100%",
                                     } : isCenter ? {
-                                        // Desktop: Advanced Peeking Slide (Center)
                                         left: "50%",
                                         transform: "translateX(-50%) scale(1)",
                                         zIndex: 10,
-                                        width: "70%",
+                                        width: "80%",
                                     } : isLeft ? {
-                                        // Desktop: Advanced Peeking Slide (Left Peek)
                                         left: "0%",
                                         transform: "translateX(-32%) scale(1)",
                                         zIndex: 5,
-                                        width: "70%",
+                                        width: "80%",
                                     } : {
-                                        // Desktop: Advanced Peeking Slide (Right Peek)
                                         left: "100%",
                                         transform: "translateX(-68%) scale(1)",
                                         zIndex: 5,
-                                        width: "70%",
+                                        width: "80%",
                                     };
 
                                     return (
@@ -125,10 +121,11 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                                         <span className="text-white text-2xl ml-1">▶</span>
                                                     </div>
                                                 )}
-                                                {/* Corner Arrow Indicator */}
-                                                <div className="absolute bottom-6 right-6 z-10 text-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                                {/* Long arrow — inside the image, bottom right */}
+                                                <div className="absolute bottom-6 right-6 z-10 flex items-center gap-0">
+                                                    <div className="w-16 h-[2px] bg-white/70"></div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 -ml-1 opacity-70">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                                                     </svg>
                                                 </div>
                                             </div>
@@ -139,7 +136,7 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                 return (
                                     <>
                                         {/* Background — Only shown on Desktop (lg+) */}
-                                        <div className="hidden lg:block absolute inset-0 z-0 scale-[0.98] transition-all duration-700 ease-in-out">
+                                        <div className="hidden lg:block absolute inset-0 z-0 scale-[1.05] transition-all duration-700 ease-in-out translate-y-6">
                                             <div className="relative w-full h-full">
                                                 <img
                                                     src={adjacentItem.image}

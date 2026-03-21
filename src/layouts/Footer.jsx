@@ -8,10 +8,10 @@ function Footer() {
             <div className="border-b border-white/10 py-10 text-center">
                 {/* Logo */}
                 <div className="flex flex-col items-center mb-8">
-                    <div className="flex items-center gap-4 w-full max-w-sm justify-center">
-                        <div className="flex-1 h-[1px] bg-[#c9a84c]"></div>
-                        <img src="/locales/assets/groupe 0.png" alt="initial" />
-                        <div className="flex-1 h-[1px] bg-[#c9a84c]"></div>
+                    <div className="flex items-center gap-4 w-full max-w-2xl justify-center px-4">
+                        <div className="h-[1px] w-32 md:w-64 bg-[#c9a84c] shrink-0"></div>
+                        <img src="/locales/assets/groupe 0.png" alt="initial" className="shrink-0" />
+                        <div className="h-[1px] w-32 md:w-64 bg-[#c9a84c] shrink-0"></div>
                     </div>
                 </div>
 

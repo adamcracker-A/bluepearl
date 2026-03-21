@@ -92,7 +92,7 @@ export const activities = [
 ];
 
 export const exploreItems = [
-    { number: "01", title: "Évasion en Yacht", desc: "...", image: "/locales/assets/yacht.png", video: "/locales/assets/yacht.mp4" },
+    { number: "01", title: "Évasion en Yacht", desc: "Découvrez Saïdia, la perle de la Méditerranée. Plages dorées, eaux cristallines et activités pour tous les goûts vous y attendent. Flânez le long du littoral et savourez la cuisine locale.", image: "/locales/assets/yacht.png", video: "/locales/assets/yacht.mp4" },
     { number: "02", title: "Plages Dorées", desc: "...", image: "/locales/assets/explore 2.png" },
     { number: "03", title: "Plages Dorées", desc: "...", image: "/locales/assets/1stvideoph.png" },
 ];

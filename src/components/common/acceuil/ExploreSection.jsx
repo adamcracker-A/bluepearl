@@ -1,4 +1,14 @@
+import { useState, useEffect } from "react";
+
 function ExploreSection({ current, prevExplore, nextExplore, exploreItems, exploreIndex, setExploreIndex }) {
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+    useEffect(() => {
+        const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <>
             <section className="flex flex-col items-center justify-center mt-16 mb-12 px-4 text-center">
@@ -29,8 +39,36 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                             </div>
                         </div>
 
-                        {/* Right — Peek Slider */}
-                        <div className="lg:w-3/5 relative h-[350px] md:h-[480px] group">
+                        {/* ── MOBILE only ── */}
+                        <div className="lg:hidden w-full relative h-[350px] overflow-hidden rounded-xl">
+                            <div
+                                className="flex h-full transition-transform duration-700 ease-in-out"
+                                style={{ transform: `translateX(-${exploreIndex * 100}%)` }}
+                            >
+                                {exploreItems.map((item, idx) => (
+                                    <div key={idx} className="min-w-full h-full relative flex-shrink-0">
+                                        <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover" />
+                                        {item.video && idx === exploreIndex && (
+                                            <video src={item.video} className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline />
+                                        )}
+                                        <span className="absolute bottom-5 left-5 text-5xl font-black text-white/20 leading-none select-none z-10">{item.number}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <button onClick={prevExplore} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center z-30">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m0 0l6-6m-6 6l6 6" />
+                                </svg>
+                            </button>
+                            <button onClick={nextExplore} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center z-30">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        {/* ── DESKTOP only ── */}
+                        <div className="hidden lg:block lg:w-3/5 relative h-[480px] group">
                             {(() => {
                                 const total = exploreItems.length;
                                 const adjacentIdx = (exploreIndex + 1) % total;
@@ -41,9 +79,7 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                     const isCenter = position === "center";
                                     const isLeft = position === "left";
 
-                                    const style = window.innerWidth < 1024 ? {
-                                        left: "0%", transform: "none", zIndex: 10, width: "100%",
-                                    } : isCenter ? {
+                                    const style = isCenter ? {
                                         left: "50%", transform: "translateX(-50%) scale(1)", zIndex: 10, width: "80%",
                                     } : isLeft ? {
                                         left: "0%", transform: "translateX(-32%) scale(1)", zIndex: 5, width: "80%",
@@ -58,12 +94,12 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                             className="absolute top-0 h-full"
                                             style={{ transition: "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)", cursor: isCenter ? "default" : "pointer", ...style }}
                                         >
-                                            <div className="relative w-full h-full min-h-[300px] rounded-xl overflow-hidden">
-                                                <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover z-0" />
+                                            <div className="relative w-full h-full rounded-xl overflow-hidden">
+                                                <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover" />
                                                 {item.video && isCenter && (
-                                                    <video src={item.video} className="absolute inset-0 w-full h-full object-cover z-0" autoPlay muted loop playsInline />
+                                                    <video src={item.video} className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline />
                                                 )}
-                                                <span className="absolute bottom-6 left-6 text-5xl md:text-7xl font-black text-white/20 leading-none select-none z-10">
+                                                <span className="absolute bottom-6 left-6 text-7xl font-black text-white/20 leading-none select-none z-10">
                                                     {item.number}
                                                 </span>
                                                 {item.video && isCenter && (
@@ -71,7 +107,6 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                                         <span className="text-white text-2xl ml-1">▶</span>
                                                     </div>
                                                 )}
-                                                {/* Single arrow — inside the image */}
                                                 <div className="absolute bottom-6 right-6 z-10">
                                                     <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <line x1="0" y1="10" x2="66" y2="10" stroke="white" strokeWidth="2" strokeOpacity="0.85" />
@@ -85,7 +120,7 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
 
                                 return (
                                     <>
-                                        <div className="hidden lg:block absolute inset-0 z-0 scale-[1.05] transition-all duration-700 ease-in-out translate-y-6">
+                                        <div className="absolute inset-0 z-0 scale-[1.05] transition-all duration-700 ease-in-out translate-y-6">
                                             <img src={adjacentItem.image} className="w-full h-full object-cover" alt="Peeking Background" />
                                         </div>
                                         {renderCard(centerItem, "center")}
@@ -93,21 +128,21 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                 );
                             })()}
 
-                            <button onClick={prevExplore} className="absolute left-4 md:left-6 lg:left-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                            <button onClick={prevExplore} className="absolute left-[10%] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m0 0l6-6m-6 6l6 6" />
                                 </svg>
                             </button>
-                            <button onClick={nextExplore} className="absolute right-4 md:right-6 lg:right-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                            <button onClick={nextExplore} className="absolute right-[10%] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" />
                                 </svg>
                             </button>
                         </div>
                     </div>
 
                     {/* Dots */}
-                    <div className="flex justify-center gap-2 mt-10">
+                    <div className="flex justify-center gap-2 mt-10 ml-120">
                         {exploreItems.map((_, idx) => (
                             <button key={idx} onClick={() => setExploreIndex(idx)}
                                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === exploreIndex ? 'bg-[#1a3c5e] scale-125' : 'bg-gray-300 hover:bg-gray-400'}`} />

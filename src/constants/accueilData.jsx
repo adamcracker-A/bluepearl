@@ -93,6 +93,6 @@ export const activities = [
 
 export const exploreItems = [
     { number: "01", title: "Évasion en Yacht", desc: "...", image: "/locales/assets/yacht.png", video: "/locales/assets/yacht.mp4" },
-    { number: "03", title: "Plages Dorées", desc: "...", image: "/locales/assets/explore 2.png" },
-    { number: "02", title: "Plages Dorées", desc: "...", image: "/locales/assets/1stvideoph.png" },
+    { number: "02", title: "Plages Dorées", desc: "...", image: "/locales/assets/explore 2.png" },
+    { number: "03", title: "Plages Dorées", desc: "...", image: "/locales/assets/1stvideoph.png" },
 ];

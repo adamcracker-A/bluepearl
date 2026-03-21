@@ -2,7 +2,6 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
     return (
         <>
             <section className="flex flex-col items-center justify-center mt-16 mb-12 px-4 text-center">
-
                 {/* Logo / Icon */}
                 <img
                     src="/locales/assets/images/logo/groupe.png"
@@ -22,7 +21,6 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
 
                 {/* Gold Line */}
                 <div className="w-70 h-[2px] bg-[#c9a84c] mt-4 mb-8"></div>
-
             </section>
 
             {/* ✦ Explore Saidia Section */}
@@ -54,8 +52,7 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                         </div>
 
                         {/* Right — Peek Slider */}
-                        <div className="lg:w-3/5 relative h-[420px] group">
-
+                        <div className="lg:w-3/5 relative h-[320px] md:h-[420px] group">
                             {(() => {
                                 const total = exploreItems.length;
                                 const adjacentIdx = (exploreIndex + 1) % total;
@@ -66,19 +63,28 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                     const isCenter = position === "center";
                                     const isLeft = position === "left";
 
-                                    const style = isCenter ? {
+                                    const style = window.innerWidth < 1024 ? {
+                                        // Mobile: Normal Full-Width Slide
+                                        left: "0%",
+                                        transform: "none",
+                                        zIndex: 10,
+                                        width: "100%",
+                                    } : isCenter ? {
+                                        // Desktop: Advanced Peeking Slide (Center)
                                         left: "50%",
                                         transform: "translateX(-50%) scale(1)",
                                         zIndex: 10,
                                         width: "70%",
                                     } : isLeft ? {
+                                        // Desktop: Advanced Peeking Slide (Left Peek)
                                         left: "0%",
-                                        transform: "translateX(-32%) scale(0.82)",
+                                        transform: "translateX(-32%) scale(1)",
                                         zIndex: 5,
                                         width: "70%",
                                     } : {
+                                        // Desktop: Advanced Peeking Slide (Right Peek)
                                         left: "100%",
-                                        transform: "translateX(-68%) scale(0.82)",
+                                        transform: "translateX(-68%) scale(1)",
                                         zIndex: 5,
                                         width: "70%",
                                     };
@@ -95,15 +101,13 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                             }}
                                         >
                                             <div className="relative w-full h-full rounded-xl overflow-hidden">
-
                                                 {/* Image — always shown as base */}
                                                 <img
                                                     src={item.image}
                                                     alt={item.title}
                                                     className="absolute inset-0 w-full h-full object-cover"
                                                 />
-
-                                                {/* Video — fills card naturally, only for center */}
+                                                {/* Video — center only */}
                                                 {item.video && isCenter && (
                                                     <video
                                                         src={item.video}
@@ -111,27 +115,22 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                                         autoPlay muted loop playsInline
                                                     />
                                                 )}
-
                                                 {/* Slide number */}
-                                                <span className="absolute bottom-6 left-6 text-7xl font-black text-white/20 leading-none select-none z-10">
+                                                <span className="absolute bottom-6 left-6 text-5xl md:text-7xl font-black text-white/20 leading-none select-none z-10">
                                                     {item.number}
                                                 </span>
-
-                                                {/* Play button - only for center video */}
+                                                {/* Play button - center video only */}
                                                 {item.video && isCenter && (
                                                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/50 flex items-center justify-center hover:bg-white/40 transition-all duration-300">
                                                         <span className="text-white text-2xl ml-1">▶</span>
                                                     </div>
                                                 )}
-
-                                                {/* Arrow on the left peeking card */}
-                                                {isLeft && (
-                                                    <div className="absolute top-1/2 right-4 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="white" className="w-5 h-5">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                                        </svg>
-                                                    </div>
-                                                )}
+                                                {/* Corner Arrow Indicator */}
+                                                <div className="absolute bottom-6 right-6 z-10 text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                                    </svg>
+                                                </div>
                                             </div>
                                         </div>
                                     );
@@ -139,9 +138,9 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
 
                                 return (
                                     <>
-                                        {/* Background — One image stretched across the whole group, peeking on both sides */}
-                                        <div className="absolute inset-0 z-0 scale-[0.98] transition-all duration-700 ease-in-out">
-                                            <div className="relative w-full h-full overflow-hidden">
+                                        {/* Background — Only shown on Desktop (lg+) */}
+                                        <div className="hidden lg:block absolute inset-0 z-0 scale-[0.98] transition-all duration-700 ease-in-out">
+                                            <div className="relative w-full h-full">
                                                 <img
                                                     src={adjacentItem.image}
                                                     className="w-full h-full object-cover"
@@ -149,8 +148,7 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                                                 />
                                             </div>
                                         </div>
-
-                                        {/* Center active image (rendered last so it's on top) */}
+                                        {/* Center active image */}
                                         {renderCard(centerItem, "center")}
                                     </>
                                 );
@@ -159,17 +157,17 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
                             {/* Navigation Arrows */}
                             <button
                                 onClick={prevExplore}
-                                className="absolute left-[15%] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-30 opacity-0 group-hover:opacity-100"
+                                className="absolute left-4 md:left-6 lg:left-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                                 </svg>
                             </button>
                             <button
                                 onClick={nextExplore}
-                                className="absolute right-[15%] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/30 transition-all duration-300 z-30 opacity-0 group-hover:opacity-100"
+                                className="absolute right-4 md:right-6 lg:right-[15%] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center hover:bg-white/40 transition-all duration-300 z-30 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                 </svg>
                             </button>
@@ -189,4 +187,5 @@ function ExploreSection({ current, prevExplore, nextExplore, exploreItems, explo
         </>
     )
 }
+
 export default ExploreSection;
